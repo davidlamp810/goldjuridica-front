@@ -1,0 +1,135 @@
+.formulario {
+    width: 100%; 
+    max-width: 600px;
+    margin: 50px auto; 
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.formulario h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form__content {
+    margin-bottom: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__content input {
+    width: 90%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+}
+
+.form__content {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.form__content input {
+    width: 100%;
+    padding: 10px 40px 10px 15px; 
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.form__content input:focus {
+    border-color: #007bff;
+}
+
+.form__content .icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+
+.form__content .icon:hover {
+    color: #000; 
+}
+
+.form__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-top: 20px;
+}
+
+.buttons__1, .buttons__2 {
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    text-align: center; 
+    cursor: pointer;
+    min-width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.buttons__1 {
+    background-color: #00275b;
+    flex-grow: 1.387;
+    margin-right: 10px; 
+}
+
+.buttons__2 {
+    background-color: #00275b;
+    flex-grow: 1;
+}
+
+.buttons__1:hover, .buttons__2:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+    .formulario {
+        padding: 15px;
+        margin: 20px 10px;
+        max-width: 90%;
+    }
+
+    .formulario h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        padding: 20px;
+    }
+
+    .form__content input {
+        padding: 12px 20px 12px 15px; /* Ajustar el padding para mejor comodidad */
+    }
+    form{
+        padding: 50px 10px;
+    }
+    .form__buttons {
+       
+    }
+
+    .buttons__1, .buttons__2 {
+        width: 100%;
+    }
+    form__content .icon {
+        /* right: 10px; */
+        margin: -4px 5px;
+    }
+}

@@ -1,0 +1,24 @@
+.whatsapp-container {
+    position: fixed;
+    bottom: 20%; /* Distancia desde la parte inferior de la ventana */
+    right: 10%;   /* Distancia desde la parte izquierda de la ventana */
+    z-index: 1000; /* Para asegurarse de que esté por encima de otros elementos */
+}
+
+.whatsapp-button {
+    display: inline-block;
+    background-color: #25D366;
+    color: white;
+    width: 60px; /* Definir ancho */
+    height: 60px; /* Definir alto para hacer el botón circular */
+    border-radius: 50%; /* Hacer el botón completamente redondo */
+    font-size: 24px;
+    text-align: center;
+    line-height: 60px; /* Centrar el texto verticalmente */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    background-color: #128C7E;
+}
