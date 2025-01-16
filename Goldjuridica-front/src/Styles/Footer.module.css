@@ -1,8 +1,13 @@
+
 .icons {
     display: flex;
     gap: 20px;
 }
-
+.logo {
+    padding-top: 25px;
+    height: 70px;
+    width: 250px;
+}
 .footer {
     display: flex;
     justify-content: space-between;
@@ -10,6 +15,7 @@
     padding: 10px 100px;
     max-width: 100%;
     box-sizing: border-box;
+    background-color: #2C3E50;
 }
 
 .information {
@@ -17,6 +23,7 @@
     justify-content: center;
     align-items: center;
     font-size: 12px;
+    background-color: #2C3E50;
 }
 
 @media (max-width: 480px) {

@@ -4,9 +4,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #003366;
+    background-color: #2C3E50;
 }
-
+.navLogo {
+    height: 70px;
+    width: 250px;
+}
 .buttons {
     display: flex;
     align-items: center;
@@ -29,38 +32,44 @@ a {
     display: flex;
     align-items: center; 
     justify-content: center; 
-    text-decoration: none;
 }
 
 .createAccount {
-    background: #FFFFFF;
-    color: #003366;
+    background: #3498DB;
+    color: #FFFFFF;
     width: 122px;
     height: 40px;
     border-radius: 50px;
     font-size: 12px;
+    text-decoration: none;
 }
 
 .createAccount:hover {
-    background: #003366;
+    background: #E67E22;
     color: #FFFFFF;
-    border: 2px solid #FFFFFF;
+    border: 1px solid #FFFFFF;
+    text-decoration: none;
 }
 
 .newSesion {
-    background: #003366;
+   background: #3498DB;
     color: #FFFFFF;
-    border: 2px solid #FFFFFF;
     width: 122px;
     height: 40px;
     border-radius: 50px;
     font-size: 12px;
+    text-decoration: none;
+}
+.newSesion:hover{
+    background: #E67E22;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    text-decoration: none;
 }
 
 .logoutButton {
-    background: #FFFFFF;
-    color: #003366;
-    border: 2px solid #003366;
+    background: #3498DB;
+    color: #FFFFFF;
     width: 122px;
     height: 40px;
     border-radius: 50px;
@@ -73,9 +82,9 @@ a {
 }
 
 .logoutButton:hover {
-    background: #003366;
+    background: #E67E22;
     color: #FFFFFF;
-    border-color: #003366;
+    border: 1px solid #FFFFFF;
 }
 
 .profile {

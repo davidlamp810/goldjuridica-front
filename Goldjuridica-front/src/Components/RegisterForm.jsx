@@ -19,7 +19,7 @@ const RegisterForm = () => {
         confirmarmail: "",
         password: "",
         confirmarcontraseña: "",
-        rolId: 2
+        rolId: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -104,10 +104,18 @@ const RegisterForm = () => {
             }
         }
 
+        if (touched.rolId) {
+            if (!usuario.rolId || isNaN(usuario.rolId)) {
+                newErrors.rolId = "El rol debe ser un número válido.";
+            } else {
+                newValid.rolId = true;
+            }
+        }
+
         setErrors(newErrors);
         setValid(newValid);
 
-        const isFormValid = Object.keys(newValid).length === 6 && Object.values(newValid).every((value) => value === true);
+        const isFormValid = Object.keys(newValid).length === 7 && Object.values(newValid).every((value) => value === true);
         setIsFormValid(isFormValid);
     };
 
@@ -129,7 +137,7 @@ const RegisterForm = () => {
 
         setUsuario((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: name === "rolId" ? parseInt(value) || "" : value,
         }));
 
         setTouched((prevState) => ({
@@ -143,6 +151,9 @@ const RegisterForm = () => {
         validate();
 
         if (Object.keys(errors).length === 0) {
+            // Console log para ver los datos que se envían
+            console.log("Datos a enviar:", usuario);
+
             try {
                 const usuarioData = {
                     nombre: usuario.nombre,
@@ -152,7 +163,11 @@ const RegisterForm = () => {
                     rolId: usuario.rolId,
                 };
 
+                // Log antes de hacer la llamada a la API
+                console.log("Enviando datos a la API:", usuarioData);
+
                 const response = await setUser(usuarioData);
+                
                 if (response.status === 400) {
                     setSubmitMessage("El email ya está registrado.");
                     return;
@@ -160,7 +175,6 @@ const RegisterForm = () => {
 
                 setSubmitMessage("Usuario registrado exitosamente.");
 
-                // Resetear el formulario
                 setUsuario({
                     nombre: "",
                     apellido: "",
@@ -168,6 +182,7 @@ const RegisterForm = () => {
                     confirmarmail: "",
                     password: "",
                     confirmarcontraseña: "",
+                    rolId: "",
                 });
 
                 setTouched({});
@@ -176,7 +191,6 @@ const RegisterForm = () => {
                 setShowPassword(false);
                 setShowConfirmPassword(false);
 
-                // Esperar 5 segundos y redirigir al login
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
@@ -260,6 +274,16 @@ const RegisterForm = () => {
                 </div>
                 {errors.confirmarcontraseña && <p className={FormStyle.errorMessage}>{errors.confirmarcontraseña}</p>}
 
+                <input
+                    type="number"
+                    name="rolId"
+                    placeholder="Codigo de la empresa"
+                    className={`${FormStyle.formInput} ${touched.rolId && (errors.rolId ? FormStyle.errorInput : valid.rolId ? FormStyle.validInput : '')}`}
+                    value={usuario.rolId}
+                    onChange={handleChange}
+                />
+                {errors.rolId && <p className={FormStyle.errorMessage}>{errors.rolId}</p>}
+
                 {submitMessage && (
                     <p className={submitMessage.includes("exitosamente") ? FormStyle.successMessage : FormStyle.errorMessageValid}>
                         {submitMessage}
@@ -276,4 +300,3 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
-

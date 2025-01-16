@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 2.5%;
 }
 
 .registerForm {
@@ -72,12 +73,15 @@
     border-radius: 50px 0 0 50px;
     font-size: 14px;
     cursor: pointer;
-    background: #003366;
+    background: #3498DB;
     color: #FFFFFF;
 }
 
 .backButton:hover, .submitButton:hover{
     opacity: 50%;
+    background: #E67E22;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
 }
 
 .submitButton {
@@ -87,7 +91,7 @@
     border-radius: 0 50px 50px 0;
     font-size: 14px;
     cursor: pointer;
-    background: #003366;
+    background: #3498DB;
     color: #FFFFFF;
 }
 
