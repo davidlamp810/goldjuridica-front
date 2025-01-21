@@ -12,7 +12,7 @@ const Favorites = () => {
 
     // Obtener los favoritos al cargar el componente
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/favoritos/${userData.id}`)
+        axios.get(`http://localhost:3000/api/favoritos/${userData.rolId}`) // Usar rolId en lugar de id
             .then(response => {
                 const favoritosData = response.data;
 
@@ -26,20 +26,7 @@ const Favorites = () => {
                 }
             })
             .catch(error => console.error("Error al obtener favoritos:", error));
-    }, [userData.id, dispatch]);
-    // Función para eliminar un favorito del estado global y del backend
-    const toggleFavorito = (productoId) => {
-        console.log("Datos enviados a la API:", { usuarioId: state.userData.id, productoId });
-        axios.post(`http://localhost:3000/api/favoritos`, { usuarioId: state.userData.id, productoId })
-            .then(response => {
-                console.log(response.data.message);
-
-                // Eliminar el producto del estado local y global después de la respuesta exitosa
-                setFavoritos(favoritos.filter(product => product.id !== productoId));
-                dispatch({ type: 'REMOVE_BY_ID', payload: productoId });
-            })
-            .catch(error => console.error("Error al eliminar favorito:", error));
-    };
+    }, [userData.rolId, dispatch]); // Usar rolId en lugar de id
 
     return (
         <div>
@@ -53,7 +40,6 @@ const Favorites = () => {
                                 <h3>{product.nombre}</h3>
                                 <p>{product.descripcion}</p>
                                 <div className="favorite-buttons">
-                                    <button className="delete-button" onClick={() => toggleFavorito(product.id)}>Eliminar</button>
                                     <Link to={`/detail/${product.id}`} className="detail-button">
                                         Ver detalle
                                     </Link>

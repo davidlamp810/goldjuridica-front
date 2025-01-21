@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { getAllCategory } from '../api/category-Apis';
+import { useCateringStates } from '../Components/utils/globalContext'; // Importa el estado global
 
 const Category = ({ onCategorySelect, selectedCategories = [] }) => {
+    const { state } = useCateringStates();  // Accede al estado global
+    const { userData } = state;  // Obtén userData desde el estado global
+
+    // Si hay alguien logueado, no renderizamos el componente
+    if (userData) {
+        return null;  // No renderiza el componente si hay un usuario logueado
+    }
+
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {

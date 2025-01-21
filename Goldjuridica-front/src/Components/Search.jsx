@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../Styles/Search.modules.css';
 import reservas from '../utils/reservas';
 import axios from 'axios';
+import { useCateringStates } from '../Components/utils/globalContext'; // Importa el estado global
 
 // Convertir fechas reservadas a objetos Date
 const formattedReservas = reservas.map(reserva => ({
@@ -14,6 +15,14 @@ const formattedReservas = reservas.map(reserva => ({
 }));
 
 const Search = ({ setSearchTerm, setSearchDate, onSearch }) => {
+    const { state } = useCateringStates();  // Accede al estado global
+    const { userData } = state;  // Obtén userData desde el estado global
+
+    // Si hay un usuario logueado, no renderizamos el componente
+    if (userData) {
+        return null;  // No renderiza el componente si el usuario está logueado
+    }
+
     const [localSearchTerm, setLocalSearchTerm] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
     const [suggestions, setSuggestions] = useState([]);
@@ -230,6 +239,3 @@ Search.propTypes = {
 };
 
 export default Search;
-
-
-

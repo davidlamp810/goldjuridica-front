@@ -171,11 +171,11 @@
 
 /* Ocultar todo el contenido del admin-panel en pantallas pequeñas */
 @media (max-width: 1340px) {
-    .admin-panel {
+    /*.admin-panel {
         display: none !important;
         width: 100% !important;
         box-sizing: border-box !important;
-    }
+    }*/
 }
 
     .mobile-message {

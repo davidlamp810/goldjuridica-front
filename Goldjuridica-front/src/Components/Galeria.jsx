@@ -8,12 +8,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const Galeria = ({ searchTerm = '', setNoResults, selectedCategories = [], setTotalResults }) => {
-  const { state, dispatch } = useCateringStates();
-  const { favs } = state;
+  const { state } = useCateringStates();
+  const { favs, userData } = state;  // Asegúrate de tener userData aquí
+
+  // Solo renderizar si no hay usuario logueado
+  if (userData) {
+    return null;  // No renderiza el componente si hay alguien logueado
+  }
+
   const [images, setImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [imagesPerPage, setImagesPerPage] = useState(8);
-  const [favoriteStatus, setFavoriteStatus] = useState({}); // Nuevo estado para guardar favoritos
+  const [favoriteStatus, setFavoriteStatus] = useState({});
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -73,57 +79,17 @@ const Galeria = ({ searchTerm = '', setNoResults, selectedCategories = [], setTo
     }
     return shuffledArray;
   };
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("¿Está seguro de cerrar sesión?");
-    if (confirmLogout) {
-        dispatch({ type: 'CLEAR_USER_DATA' }); // Usar 'CLEAR_USER_DATA' para limpiar el estado y localStorage
-        dispatch
-        navigate('/');
-    }
-};
-  // useEffect para sincronizar favoritos cuando el usuario está logueado y validar los favoritos
-  useEffect(() => {
-    if (state.userData && state.userData.id) {
-      // Solo realiza la petición si el usuario está logueado
-      axios.get(`http://localhost:3000/api/favoritos/${state.userData.id}`)
-        .then(response => {
-          const favoritosIds = response.data;
 
-          // Actualiza el estado global con los favoritos obtenidos
-          if (favoritosIds) {
-            dispatch({type: 'REMOVE_ALL'})
-            dispatch({ type: 'ADD_FAVORITES', payload: favoritosIds });
-
-            // Crear un objeto para almacenar el estado de favorito de cada imagen
-            const favoriteObj = {};
-            images.forEach(image => {
-              favoriteObj[image.id] = favoritosIds.some(fav => fav.id === image.id);
-            });
-
-            setFavoriteStatus(favoriteObj); // Actualizar el estado de favoritos
-          }
-          if(!state.userData){
-            axios.get('http://localhost:3000/api/productos?pageSize=1000000')
-          }
-        })
-        .catch(error => console.error("Error al obtener favoritos:", error));
-    }
-  }, [state.userData, dispatch, images]); // Dependencias incluyen `images`
-
-  // Función para agregar/eliminar de favoritos
   const toggleFavorito = (productoId) => {
     console.log("Datos enviados a la API:", { usuarioId: state.userData.id, productoId });
     axios.post(`http://localhost:3000/api/favoritos`, { usuarioId: state.userData.id, productoId })
       .then(response => {
         console.log(response.data.message);
-        // Actualizar el estado local para reflejar el cambio en favoritos
         setFavoriteStatus(prevState => ({
           ...prevState,
           [productoId]: !prevState[productoId]
         }));
-        axios.get('http://localhost:3000/api/productos?pageSize=1000000')
       })
-      
       .catch(error => console.error("Error al eliminar favorito:", error));
   };
 
@@ -155,7 +121,7 @@ const Galeria = ({ searchTerm = '', setNoResults, selectedCategories = [], setTo
             </Link>
             <button
               onClick={() => toggleFavorito(image.id)}
-              className={`favButton ${favoriteStatus[image.id] && state.userData? 'favorite' : ''}`}>
+              className={`favButton ${favoriteStatus[image.id] && state.userData ? 'favorite' : ''}`}>
               <FontAwesomeIcon icon={faHeart} />
             </button>
           </div>
@@ -166,7 +132,7 @@ const Galeria = ({ searchTerm = '', setNoResults, selectedCategories = [], setTo
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         
-        <span className="page-number">{currentPage + 1}</span> {/* Muestra el número de página */}
+        <span className="page-number">{currentPage + 1}</span>
 
         <button onClick={nextPage} disabled={(currentPage + 1) * imagesPerPage >= images.length}>
           <FontAwesomeIcon icon={faChevronRight} />

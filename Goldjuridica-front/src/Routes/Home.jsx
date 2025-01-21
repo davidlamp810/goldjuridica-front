@@ -94,7 +94,6 @@ function Home() {
             {/* Mostrar Recomendados si no hay filtros aplicados o si hay búsqueda activa */}
             {(!areFiltersApplied() || isSearchActive()) && (
                 <>
-                    <h1 className="title">Recomendados</h1>
                     <div style={{ marginTop: '20px' }}>
                         <Galeria searchTerm="" selectedCategories={[]} /> {/* Recomendados sin filtros */}
                     </div>
