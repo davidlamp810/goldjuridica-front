@@ -3,6 +3,9 @@ import Galeria from '../Components/Galeria';
 import '../Styles/Home.css';
 import Search from '../Components/Search';
 import Category from '../Components/Category';
+import Favorites from '../Components/Favorites';
+import { useCateringStates } from '../Components/utils/globalContext';
+
 
 function Home() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -10,6 +13,9 @@ function Home() {
     const [noResults, setNoResults] = useState(false);
     const [selectedCategories, setSelectedCategories] = useState([]); // Array de objetos de categorías seleccionadas
     const [totalResults, setTotalResults] = useState(0);
+    const { state } = useCateringStates();
+    const { userData } = state;
+
 
     const formatDate = (date) => {
         if (!date) return '';
@@ -41,6 +47,7 @@ function Home() {
 
     return (
         <main className="main">
+             {userData && <Favorites />}
             <Search setSearchTerm={setSearchTerm} setSearchDate={setSearchDate} onSearch={handleSearch} />
 
             <Category onCategorySelect={setSelectedCategories} selectedCategories={selectedCategories} />
