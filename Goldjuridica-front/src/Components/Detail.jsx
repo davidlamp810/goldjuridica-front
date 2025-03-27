@@ -166,32 +166,12 @@ const Detail = () => {
         );
     };
 
-    const handleDateChange = (date) => {
-        if (isDateDisabled(date)) {
-            setErrorMessage('Esta fecha ya está reservada y no está disponible');
-            setSelectedDate(null);
-
-            // Mostrar el mensaje por 4 segundos y luego ocultarlo
-            setTimeout(() => {
-                setErrorMessage('');
-            }, 4000);
-        } else {
-            setErrorMessage('');
-            setSelectedDate(date);
-        }
-    };
-
     return (
         <div className="content">
             <div className="card_container" key={productSelected.id}>
                 <div className="card_title">
                     <h2>{productSelected.nombre || 'Título del servicio'}</h2>
 
-                    <FontAwesomeIcon
-                        icon={faArrowLeft}
-                        className="goBack"
-                        onClick={handleBackClick}
-                    />
                 </div>
                 <div className="card_content">
                     <div className="card_image">
@@ -245,30 +225,6 @@ const Detail = () => {
                         <p className='none_padding'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos blanditiis debitis totam dicta illo, magnam accusamus fuga doloremque laboriosam necessitatibus sit doloribus nisi. Voluptate culpa illo placeat doloremque, cupiditate nihil?</p>
                     </div>
 
-                    {userData ? (
-                        <div className="datepicker-container">
-                            <DatePicker
-                                selected={selectedDate}
-                                onChange={handleDateChange}
-                                inline
-                                locale="es"
-                                dayClassName={date =>
-                                    isDateDisabled(date) ? 'disabled-date' : undefined
-                                }
-                            />
-                            {errorMessage && (
-                                <p className="errorMessage">{errorMessage}</p>
-                            )}
-                        </div>
-                    ) : (
-
-                        <div className="other_information">
-                            <p className='init_sesion'>
-                                Debes iniciar sesión para ver las fechas disponibles
-                            </p>
-                        </div>
-                    )
-                    }
                 </div>
 
             </div>

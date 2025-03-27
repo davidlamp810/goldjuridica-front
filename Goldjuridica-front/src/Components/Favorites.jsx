@@ -41,7 +41,7 @@ const Favorites = () => {
                                 <p>{product.descripcion}</p>
                                 <div className="favorite-buttons">
                                     <Link to={`/detail/${product.id}`} className="detail-button">
-                                        Ver detalle
+                                        Empezar
                                     </Link>
                                 </div>
                             </div>
